@@ -5,7 +5,7 @@ from inscribed_shapes import InscribedShapes
 
 class Renderer:
     WHITE_COLOR = (255, 255, 255, 255)
-    BLACK_COLOR = (0, 0, 0, 0)
+    BLACK_COLOR = (0, 0, 0, 255)
 
     def __init__(self, window):
         self._window = window
