@@ -3,22 +3,22 @@ import sdl2
 
 class EventDispatcher:
     def __init__(self, event_loop, window):
-        self.__window = window
-        self.__event_loop = event_loop
-        self.__event_dispatchers = {
-            sdl2.SDL_WINDOWEVENT: self.__dispatch_window_event,
-            sdl2.SDL_QUIT: self.__dispatch_quit_event
+        self._window = window
+        self._event_loop = event_loop
+        self._event_dispatchers = {
+            sdl2.SDL_WINDOWEVENT: self._dispatch_window_event,
+            sdl2.SDL_QUIT: self._dispatch_quit_event
         }
 
     def dispatch(self, event):
-        dispatcher = self.__event_dispatchers.get(event.type)
+        dispatcher = self._event_dispatchers.get(event.type)
         if dispatcher is not None:
             dispatcher(event)
 
-    def __dispatch_window_event(self, event):
+    def _dispatch_window_event(self, event):
         if event.window.event == sdl2.SDL_WINDOWEVENT_RESIZED:
-            self.__window.resize()
+            self._window.resize()
 
-    def __dispatch_quit_event(self, _):
-        self.__event_loop.stop()
-        self.__window.close()
+    def _dispatch_quit_event(self, _):
+        self._event_loop.stop()
+        self._window.close()

@@ -6,20 +6,20 @@ from event_dispatcher import EventDispatcher
 
 class EventLoop:
     def __init__(self, window):
-        self.__event_dispatcher = EventDispatcher(self, window)
-        self.__running = False
+        self._event_dispatcher = EventDispatcher(self, window)
+        self._running = False
 
     def run(self):
-        self.__running = True
-        while self.__running:
-            self.__receive_events()
+        self._running = True
+        while self._running:
+            self._receive_events()
 
     def stop(self):
-        self.__running = False
+        self._running = False
 
-    def __receive_events(self):
+    def _receive_events(self):
         event = sdl2.SDL_Event()
         event_pointer = ctypes.byref(event)
-        while self.__running and sdl2.SDL_PollEvent(event_pointer) != 0:
-            self.__event_dispatcher.dispatch(event)
+        while self._running and sdl2.SDL_PollEvent(event_pointer) != 0:
+            self._event_dispatcher.dispatch(event)
 
