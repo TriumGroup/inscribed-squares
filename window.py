@@ -5,7 +5,10 @@ from rendrer import Renderer
 
 
 class Window:
-    def __init__(self, title, width=500, height=500):
+    DEFAULT_WIDTH = 800
+    DEFAULT_HEIGHT = 800
+
+    def __init__(self, title, width=DEFAULT_WIDTH, height=DEFAULT_HEIGHT):
         sdl2.SDL_Init(sdl2.SDL_INIT_VIDEO)
         self.sdl_window = sdl2.SDL_CreateWindow(
             title,
