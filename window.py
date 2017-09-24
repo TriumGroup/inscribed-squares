@@ -15,17 +15,24 @@ class Window:
             height,
             sdl2.SDL_WINDOW_RESIZABLE
         )
-        self.renderer = Renderer(self.__sdl_window)
+        self.renderer = Renderer(self)
+        self.resize()
+
+    @property
+    def sdl_window(self):
+        return self.__sdl_window
+
+    @property
+    def size(self):
+        width = ctypes.c_int()
+        height = ctypes.c_int()
+        sdl2.SDL_GetWindowSize(self.__sdl_window, ctypes.byref(width), ctypes.byref(height))
+        return width.value, height.value
 
     def resize(self):
-        self.renderer.resize(self.__window_size())
+        self.renderer.redraw()
 
     def close(self):
         sdl2.SDL_DestroyWindow(self.__sdl_window)
         sdl2.SDL_Quit()
 
-    def __window_size(self):
-        width = ctypes.c_int()
-        height = ctypes.c_int()
-        sdl2.SDL_GetWindowSize(self.__sdl_window, ctypes.byref(width), ctypes.byref(height))
-        return width.value, height.value
