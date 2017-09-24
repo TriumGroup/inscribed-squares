@@ -1,5 +1,6 @@
-import sdl2
 import ctypes
+
+import sdl2
 
 from event_dispatcher import EventDispatcher
 

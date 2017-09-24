@@ -1,7 +1,7 @@
 import sys
 
-from window import Window
 from event_loop import EventLoop
+from window import Window
 
 
 def main():
