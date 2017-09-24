@@ -1,6 +1,7 @@
 import sdl2
 
-from math import trunc, tan, pi
+from math import tan, pi
+from line import Line
 
 
 class InscribedShapes:
@@ -30,7 +31,7 @@ class InscribedShapes:
     def _draw_shape(self):
         for point_with_index in enumerate(self._points):
             shape_side = self._neighboring_points(point_with_index)
-            self._connect_points(*shape_side)
+            self._draw_side(shape_side)
 
     def _neighboring_points(self, point_with_index):
         point_index, point = point_with_index
@@ -38,15 +39,6 @@ class InscribedShapes:
 
     def _next_point(self, current_point_index):
         return self._points[(current_point_index + 1) % len(self._points)]
-
-    def _connect_points(self, start_x, start_y, end_x, end_y):
-        sdl2.SDL_RenderDrawLine(
-            self._renderer.sdl_renderer,
-            trunc(start_x),
-            trunc(start_y),
-            trunc(end_x),
-            trunc(end_y)
-        )
 
     def _shift_points(self):
         self._points = list(map(self._shifted_point, enumerate(self._points)))
@@ -61,7 +53,5 @@ class InscribedShapes:
     def _clipping_factor(self):
         return tan(self._shift_angle) / (tan(self._shift_angle) + 1)
 
-    def _draw_point(self, point):
-        x, y = point
-        sdl2.SDL_RenderDrawPoint(self._renderer.sdl_renderer, x, y)
-
+    def _draw_side(self, side):
+        Line(self._renderer.sdl_renderer, side).draw()
