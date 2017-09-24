@@ -11,7 +11,6 @@ class Renderer:
             -1,
             sdl2.SDL_RENDERER_ACCELERATED
         )
-        self.__inscribed_shapes = InscribedShapes(self)
 
     @property
     def sdl_renderer(self):
@@ -23,7 +22,7 @@ class Renderer:
 
     def redraw(self):
         self.__clear_draw_field()
-        self.__inscribed_shapes.draw_squares()
+        InscribedShapes(self).draw()
         sdl2.SDL_RenderPresent(self.__sdl_renderer)
 
     def __clear_draw_field(self):
