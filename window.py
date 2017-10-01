@@ -26,7 +26,7 @@ class Window:
         width = ctypes.c_int()
         height = ctypes.c_int()
         sdl2.SDL_GetWindowSize(self.sdl_window, ctypes.byref(width), ctypes.byref(height))
-        return width.value, height.value
+        return width.value // 2, height.value // 2
 
     def resize(self):
         self._renderer.resize()

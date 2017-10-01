@@ -1,6 +1,7 @@
 import sdl2
 
 from math import trunc
+import numpy as np
 
 
 # Attention! Optimized code below! Take care of your eyes.
@@ -46,4 +47,23 @@ class Line:
 
     def _draw_point(self, x, y):
         sdl2.SDL_RenderDrawPoint(self._sdl_renderer, x, y)
+        vector = np.array([x, y, 1])
+        x, y, _ = vector.dot(self._matrix()).dot(self._matrix_scale())
+        sdl2.SDL_RenderDrawPoint(self._sdl_renderer, trunc(x), trunc(y))
+
+
+    def _matrix(self):
+        return np.array([
+            [1, 0, 0],
+            [0, 1, 0],
+            [900, 200, 1],
+        ])
+
+    def _matrix_scale(self):
+        return np.array([
+            [0.5, 0, 0],
+            [0, 0.5, 0],
+            [0, 0, 0],
+        ])
+
 
